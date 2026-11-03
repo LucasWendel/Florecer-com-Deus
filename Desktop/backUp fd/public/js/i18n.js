@@ -1,0 +1,915 @@
+/*
+ * Florescer com Deus — traduções PT / EN / ES (JavaScript puro).
+ *
+ * Atributos suportados:
+ *   data-i18n="chave"               → substitui o textContent
+ *   data-i18n-html="chave"          → substitui o innerHTML (textos com <strong>, <em>…)
+ *   data-i18n-placeholder="chave"   → substitui o placeholder de inputs
+ *   data-i18n-valor="R$ 0,50"       → valor usado no marcador {valor} das traduções
+ *   <html data-i18n-title="chave">  → traduz o <title> da página
+ */
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'florescer_lang';
+  var SUPPORTED = ['pt', 'en', 'es'];
+  var HTML_LANG = { pt: 'pt-BR', en: 'en', es: 'es' };
+
+  var T = {
+    /* ======================= PORTUGUÊS ======================= */
+    pt: {
+      'lang.label': 'Idioma',
+      'doc.home': 'Florescer com Deus | Projeto missionário para mulheres',
+      'doc.funil': 'Inscrição | Florescer com Deus',
+
+      'hero.eyebrow': 'Um devocional escrito por 365 mulheres adventistas',
+      'hero.title': 'Sua história com Deus pode ser a flor que faltava no dia de outra mulher.',
+      'hero.text': 'Florescer com Deus reúne 365 histórias reais, uma para cada dia do ano, contadas por mulheres do mundo inteiro. E existe um dia esperando pela sua: o do seu aniversário.',
+      'hero.cta': 'Quero fazer parte',
+
+      'msg.eyebrow': 'Uma mensagem para você',
+      'msg.title': 'Querida mulher,',
+      'msg.p1': 'Existe um momento da sua vida em que você soube, sem sombra de dúvida, que Deus estava ali. Talvez numa noite em que não havia mais saída. Talvez numa porta que se abriu quando tudo parecia fechado. Talvez num silêncio que, de repente, se encheu de paz.',
+      'msg.p2': 'Esse momento não foi só seu. Foi um presente que Deus colocou em suas mãos para que, no tempo certo, você o entregasse a alguém que precisa ouvir: <em>você não está sozinha</em>.',
+      'msg.p3': 'Neste instante, em algum lugar do mundo, uma mulher acorda cansada, com medo e com perguntas que não consegue dizer em voz alta. Ela não precisa de um discurso. Precisa de uma história verdadeira, contada por alguém que também já chorou, também já duvidou e também viu Deus agir.',
+      'msg.p4': 'Foi assim que nasceu o Florescer com Deus.',
+
+      'author.photo': '[FOTO DA ALEXANDRA]',
+      'author.eyebrow': 'Quem idealizou este projeto',
+      'author.p1': 'Alexandra é cristã, adventista do sétimo dia, casada, mãe de dois filhos e mora na Irlanda. O <em>Florescer com Deus</em> nasceu de um sonho guardado em seu coração: reunir histórias reais de mulheres do mundo todo para que a fé de uma fortaleça a fé de outras.',
+      'author.p2': '<em>"Porque existem lágrimas que só quem chorou consegue descrever, orações que só quem esperou pela resposta conhece e vitórias cujo verdadeiro significado só entende quem caminhou com Deus até alcançá-las."</em>',
+      'author.lermais': 'Ler mais 🌷',
+            'author.p3': 'E ela deseja muito que você faça parte deste lindo projeto missionário.',
+
+      'invite.eyebrow': 'UM CONVITE ESPECIAL PARA VOCÊ',
+      'invite.italic': '<em>Sua história é única. Sua voz tem valor. E aquilo que Deus fez em sua vida pode fazer florescer a esperança no coração de outra mulher.</em>',
+      'invite.quote': 'Se este convite chegou até você, é porque, de alguma forma, sua história já tocou a minha vida ou de alguém que me conhece e me ajudou eu chegar até você. E acredito, de todo o coração, que ela também pode tocar, inspirar e transformar a vida de muitas outras mulheres.',
+
+      'project.eyebrow': 'O projeto',
+      'project.title': '365 histórias reais para o ano inteiro',
+      'project.c1t': '365 histórias',
+      'project.c1p': 'Uma para cada dia do ano. Cada devocional é um testemunho verdadeiro, contado com palavras de quem viveu.',
+      'project.c2t': 'No seu aniversário',
+      'project.c2p': 'Sua história ocupa a data em que você nasceu: um dia do livro que leva sua fé e sua voz a outras mulheres.',
+      'project.c3t': 'Milagres e cuidado',
+      'project.c3p': 'Relatos de fé, milagres e do cuidado de Deus para fortalecer mulheres em cada fase da vida.',
+
+      'world.eyebrow': 'Mulheres do mundo todo',
+      'world.title': 'Idiomas diferentes, o mesmo Deus',
+      'world.text': 'Mulheres da África, Brasil, Reino Unido, Estados Unidos, Japão, Portugal, Espanha, Argentina, Colômbia, Chile e muitos outros lugares, unidas pela mesma fé em Cristo.',
+      'chip.africa': 'África', 'chip.brasil': 'Brasil', 'chip.london': 'Reino Unido', 'chip.eua': 'Estados Unidos',
+      'chip.japao': 'Japão', 'chip.portugal': 'Portugal', 'chip.espanha': 'Espanha', 'chip.argentina': 'Argentina',
+      'chip.colombia': 'Colômbia', 'chip.chile': 'Chile', 'chip.outros': 'e outros lugares',
+
+      'verse.text': '“Vinde, ouvi, todos vós que temeis a Deus, e eu contarei o que ele tem feito por minha alma.”',
+      'verse.ref': 'Salmos 66:16 (ARC)',
+
+      'why.eyebrow': 'Por que participar',
+      'why.title': 'O que a sua história pode fazer',
+      'why.c1t': 'Consolar',
+      'why.c1p': 'Uma mulher pode ler o que Deus fez na sua vida e lembrar que Ele também cuida dela.',
+      'why.c2t': 'Ser ouvida',
+      'why.c2p': 'Sua experiência com Deus importa. Ela merece ser registrada, guardada e compartilhada.',
+      'why.c3t': 'Fazer parte de algo maior',
+      'why.c3p': 'Um projeto missionário que cresce para incentivar, motivar e inspirar mulheres.',
+
+      'how.eyebrow': 'Como participar',
+      'how.title': 'Três passos simples',
+      'how.s1t': 'Garanta a sua participação',
+      'how.s1p': 'Reserve o seu lugar e o dia do seu aniversário no livro.',
+      'how.s2t': 'Conte a sua história',
+      'how.s2p': 'Compartilhe a experiência com Deus que mais marcou sua vida.',
+      'how.s3t': 'Floresça no seu dia',
+      'how.s3p': 'Sua história será publicada na data do seu aniversário no livro.',
+
+      'part.eyebrow': 'Sua participação',
+      'part.title': 'Florescer com Deus está esperando pela sua história',
+      'part.p1': 'Cada mulher que faz parte desse projeto carrega uma história que outra mulher precisa ouvir. Uma história de fé, de recomeço, de cura, de milagre — escrita por você, para ela.',
+      'part.p2': 'Ao participar, você não apenas compartilha um testemunho. Você se torna coautora de uma missão que vai alcançar mulheres em diferentes países, idiomas e culturas.',
+      'part.p3': 'Sua história merece ser lida. Há um dia no livro com o seu nome esperando por você.',
+      'part.cta': 'Quero fazer parte desse projeto →',
+
+      'faq.eyebrow': 'Tire suas dúvidas',
+      'faq.title': 'Perguntas Frequentes',
+      'nav.participando': 'Já estou participando', 'nav.dashboard': 'Dashboard',
+      "nav.sair": "Sair",
+      'nav.quem': 'Quem idealizou?', 'nav.faq': 'Perguntas frequentes', 'nav.participar': 'Fazer parte', 'nav.login': 'Login', 'nav.submenu1': 'Já faço parte', 'nav.submenu2': 'Área restrita', 'nav.inicio': 'Início', 'brand.name': 'Florescer com Deus', 'brand.line1': 'Florescer', 'brand.line2': 'com Deus', 
+      "form.eyebrow": "Formulário de Coautora",
+      "form.title": "Formulário de Coautora 🌷",
+      "form.subtitle": "Preencha com atenção todos os campos obrigatórios.",
+      "form.sent": "Formulário já enviado",
+      "form.sent.info": "Você já enviou o formulário de coautora. Se precisar de ajuda, entre em contato com a organização pelo grupo do WhatsApp.",
+      "form.back": "← Voltar para minha área",
+      "form.required": "* Indica uma pergunta obrigatória",
+      "form.sec1": "Dados Pessoais",
+      "form.sec2": "Mini Bio",
+      "form.sec3": "Testemunho",
+      "form.sec4": "Foto",
+      "form.sec5": "Preferências",
+      "form.sec6": "Opcional",
+      "form.f1": "Nome Completo *",
+      "form.f2": "Nome a ser publicado *",
+      "form.f3": "E-mail *",
+      "form.f4": "Telefone *",
+      "form.f5": "País de Nascimento *",
+      "form.f6": "País atual *",
+      "form.f7": "Atuação ou vocação *",
+      "form.f8": "Breve informação sobre sua caminhada de fé (Limite: 60 palavras) *",
+      "form.f9": "Data do aniversário (Dia e Mês) *",
+      "form.f9.ph": "Ex: 15 de março",
+      "form.f10": "Título do Testemunho (Opcional)",
+      "form.f11.label": "Arquivo do Testemunho – formato Word (.docx) *",
+      "form.f11.hint": "<ul><li>Escreva com naturalidade e sinceridade. Sua experiência é mais importante do que frases elaboradas.</li><li>Escolha uma história central; evite contar toda a sua trajetória em 250 palavras.</li><li>Use parágrafos curtos, revise nomes e datas e evite abreviações ou excesso de citações.</li><li>Se mencionar outras pessoas, respeite a privacidade delas e não inclua informações pessoais sem autorização.</li><li>Ao citar versículos bíblicos, informe o livro, capítulo, versículo e a tradução utilizada.</li><li>Envie seu texto digitado em formato Word (.docx), permitindo a edição.</li></ul>",
+      "form.f12": "Foto: retrato individual, com boa iluminação, sem filtros excessivos e, de preferência, com fundo discreto. *",
+      "form.f13": "Preferência de Idioma para Comunicação *",
+      "form.f14": "Você autoriza a divulgação do seu nome e testemunho em nossas redes sociais para promover o livro? *",
+      "form.f15": "Como você soube deste projeto? *",
+      "form.f16": "Qual aspecto da sua caminhada de fé você mais deseja compartilhar?",
+      "form.f17": "Você tem interesse em participar de futuros eventos ou sessões ao vivo sobre o lançamento do livro?",
+      "form.f18": "Qual é o seu nível de entusiasmo para participar desta obra coletiva?",
+      "form.words": "palavras",
+      "form.max10": "Máximo 10 MB",
+      "form.max10photo": "Máximo 10 MB · JPG, PNG ou WEBP",
+      "form.choose": "— selecione —",
+      "form.opt.pt": "Português",
+      "form.opt.en": "English",
+      "form.opt.es": "Español",
+      "form.opt.yes": "Sim",
+      "form.opt.no": "Não",
+      "form.opt.maybe": "Talvez",
+      "form.opt.social": "Redes Sociais",
+      "form.opt.friend": "Amigo ou Familiar",
+      "form.opt.church": "Igreja",
+      "form.opt.invite": "Convite Pessoal da Idealizadora do Projeto",
+      "form.opt.other": "Outro",
+      "form.opt.overcoming": "Superação de adversidades",
+      "form.opt.growth": "Crescimento espiritual",
+      "form.opt.purpose": "Encontrando propósito",
+      "form.opt.service": "Atos de serviço",
+      "form.opt.prayer": "Transformação pela oração",
+      "form.scale.lo": "Baixo",
+      "form.scale.hi": "Alto",
+      "form.submit": "Enviar formulário",
+      "form.errors": "Por favor, corrija os erros abaixo:",
+      "area.eyebrow": "Área do Participante",
+      "area.hello": "Olá",
+      "area.intro": "Que alegria ter você no <em>Florescer com Deus</em>. Aqui você encontra tudo para participar do livro.",
+      "area.wa.title": "Grupo exclusivo",
+      "area.wa.desc": "Entre no grupo do WhatsApp das participantes para receber orientações e avisos.",
+      "area.wa.cta": "Entrar no grupo",
+      "area.wa.soon": "Link em breve",
+      "area.form.title": "Formulário de Coautora",
+      "area.form.desc": "Envie seu testemunho e as informações para o livro.",
+      "area.form.done": "✅ Formulário enviado",
+      "area.form.cta": "Preencher formulário",
+      "area.guide.title": "Guia de Escrita para Coautoras",
+      "area.guide.desc": "Baixe o PDF com as orientações para escrever sua história.",
+      "area.guide.cta": "Baixar Guia de Escrita (PDF)",
+      "area.guide.soon": "Disponível em breve",
+        'faq.q1': 'Preciso ser escritora profissional para participar?',
+      'faq.q2': 'Preciso pagar alguma coisa para participar?',
+      'faq.q3': 'Vou poder adquirir o livro depois de publicado?',
+      'faq.q4': 'Também posso ajudar a divulgar o livro e receber pelas vendas?',
+      'faq.q5': 'O livro será publicado apenas em um idioma?',
+      'faq.q6': 'Como faço para me inscrever?',
+      'faq.q7': 'Conheço uma amiga adventista com um testemunho lindo. Ela também pode participar?',
+      'faq.q8': 'A forma de pagamento é segura?',
+      'faq.q9': 'Vou receber direitos autorais pelas vendas do livro?',
+      'faq.q10': 'Quando o livro será publicado?',
+      'faq.a1': '<p>Não! Você só precisa ter uma história verdadeira para compartilhar. O mais importante é contar, com sinceridade, uma experiência marcante da sua caminhada com Deus. Nosso desejo é reunir testemunhos capazes de inspirar e fortalecer a fé de outras mulheres.</p>',
+      'faq.a2': '<p>Para apoiar a realização deste sonho, solicitamos uma <strong>contribuição simbólica no momento da inscrição</strong>.</p><p>Esse valor será destinado a auxiliar nos custos de preparação, impressão e publicação do livro. Sua contribuição é uma forma de ajudar esse projeto missionário a seguir adiante e alcançar mulheres em diferentes partes do mundo.</p>',
+      'faq.a3': '<p>Sim! O Florescer com Deus estará disponível para compra em formato <strong>físico e digital</strong>, com a proposta de alcançar leitoras em diferentes países. Assim, você poderá adquirir seu exemplar e compartilhar essa mensagem especial com familiares e amigas.</p>',
+      'faq.a4': '<p>Sim! As participantes poderão receber um <strong>link exclusivo de divulgação</strong>, permitindo compartilhar o livro com outras pessoas e receber uma comissão pelas vendas realizadas através desse link.</p><p>Antes de confirmar sua participação, você terá acesso aos termos e condições, incluindo as informações sobre o programa de afiliadas, os percentuais de comissão e as regras de pagamento.</p>',
+      'faq.a5': '<p>Nossa missão é levar essas histórias ao maior número possível de mulheres! E temos escritoras de vários países que farão parte do projeto. Por isso, o projeto prevê a disponibilização do livro em <strong>diferentes idiomas</strong>, ampliando seu alcance internacional.</p><p>As traduções e versões disponíveis serão informadas conforme o cronograma de publicação em cada mercado.</p>',
+      'faq.a6': '<p>É muito simples!</p><ol style="padding-left:20px;margin-top:8px;"><li style="margin-bottom:6px;">Clique no botão <strong>Quero fazer parte</strong>.</li><li style="margin-bottom:6px;">Leia atentamente e aceite os termos e condições de participação.</li><li>Preencha seus dados e finalize sua inscrição.</li></ol><p style="margin-top:12px;">Após a confirmação, você receberá as orientações para enviar sua história e participar das próximas etapas do projeto.</p>',
+      'faq.a7': '<p>Claro! Ficaremos muito felizes em conhecer a história dela!</p><p>Compartilhe esta página e convide outras mulheres adventistas a fazer parte dessa missão. Enquanto houver oportunidades disponíveis para novas coautoras, as inscrições poderão ser recebidas e avaliadas pela organização do projeto.</p>',
+      'faq.a8': '<p>A contribuição será realizada por meio de uma plataforma de pagamento online com processamento seguro e proteção dos dados financeiros.</p><p>As informações de pagamento serão tratadas pelo provedor responsável, conforme suas políticas de segurança e privacidade. Antes de concluir, você poderá conferir o valor e as informações da transação.</p>',
+      'faq.a9': '<p>A participação como coautora não prevê o pagamento de royalties sobre as vendas gerais da obra.</p><p>Entretanto, você poderá participar do programa de divulgação por meio de um link exclusivo e receber comissões pelas vendas elegíveis realizadas através dele, conforme as condições apresentadas antes da inscrição.</p>',
+      'faq.a10': '<p>Estamos trabalhando com muito carinho para que o Florescer com Deus seja publicado o mais breve possível. As participantes receberão informações sobre o cronograma, as etapas de produção e a previsão de lançamento.</p>',
+      'faq.closing1': 'Sua história pode ser a resposta à oração de outra mulher.',
+      'faq.closing2': 'Mais do que escrever um livro, queremos unir mulheres em uma missão de fé, amor e esperança.',
+      'faq.closing3': 'Vamos florescer com Deus, juntas!',
+      'doc.sobre': 'Conheça Alexandra Sá | Florescer com Deus',
+      'sobre.eyebrow': 'Idealizadora do projeto',
+      'sobre.title': 'Conheça um pouquinho de mim e da história desse sonho 🌷',
+      'sobre.intro': '<em>Olá, minha querida! Que alegria ter você aqui!</em>',
+      'sobre.p1': 'Antes de compartilhar esse projeto tão especial, quero me apresentar e contar um pouquinho sobre o sonho que Deus colocou em meu coração.',
+      'sobre.p2': '<strong>Meu nome é Alexandra Sá.</strong> Sou cristã, adventista do sétimo dia, casada, mãe de dois filhos e atualmente moro na Irlanda com minha família.',
+      'sobre.p3': 'Assim como você, sou uma mulher que vive seus desafios, suas alegrias, suas preocupações e seus momentos de fé. Uma mulher que também tem sonhos, enfrenta dias difíceis, aprende com os recomeços e encontra em Deus a força necessária para continuar.',
+      'sobre.p4': 'Ao longo da minha caminhada, Deus me presenteou com a oportunidade de conhecer mulheres maravilhosas, cada uma com uma história única. Mulheres que enfrentaram batalhas silenciosas, passaram por momentos de dor, viveram experiências extraordinárias com Deus e receberam respostas de oração que emocionam só de ouvir.',
+      'sobre.p5': 'Quantas vezes me peguei pensando: <em>Meu Deus, como eu gostaria que outras mulheres também pudessem ouvir essa história!</em>',
+      'sobre.p6': 'Mas havia algo que sempre tocava meu coração: por mais que eu tentasse contar o testemunho de outra pessoa, jamais conseguiria transmitir a mesma emoção, os mesmos sentimentos e a profundidade de quem realmente viveu aquela experiência.',
+      'sobre.q1': '<strong>Porque existem lágrimas que só quem chorou consegue descrever, orações que só quem esperou pela resposta conhece e vitórias cujo verdadeiro significado só entende quem caminhou com Deus até alcançá-las.</strong>',
+      'sobre.p7': 'E eu pensava em quantas mulheres, espalhadas pelo mundo, poderiam ser fortalecidas por esses testemunhos.',
+      'sobre.p8': 'Talvez uma mulher esteja hoje enfrentando uma luta silenciosa, sentindo-se sozinha, cansada ou até perdendo a esperança. E talvez a história que você carrega seja exatamente aquilo que ela precisa ler para encontrar forças, renovar sua fé ou simplesmente lembrar que Deus não se esqueceu dela.',
+      'sobre.p9': 'Foi assim que um sonho, guardado por tanto tempo em meu coração e apresentado tantas vezes a Deus em oração, começou a ganhar forma.',
+      'sobre.h1': '<strong>E nasceu o Florescer com Deus! 🌷</strong>',
+      'sobre.p10': 'Um livro com <strong>365 meditações</strong>, escrito a partir de experiências reais de mulheres adventistas de diferentes partes do mundo. Um projeto que nasceu do desejo de compartilhar aquilo que Deus tem feito em nossas vidas e transformar cada testemunho em uma mensagem de fé, amor e esperança.',
+      'sobre.p11': 'E sabe o que torna esse sonho ainda mais bonito?',
+      'sobre.p12': '<strong>Eu não quero realizá-lo sozinha. Quero que você faça parte dele!</strong>',
+      'sobre.p13': 'Você não precisa ser escritora, ter uma história extraordinária aos olhos do mundo ou encontrar palavras perfeitas. Precisa apenas compartilhar, com o coração aberto, uma experiência da sua caminhada com Deus.',
+      'sobre.p14': 'Porque, muitas vezes, aquilo que consideramos simples em nossa vida pode representar um verdadeiro milagre para outra pessoa.',
+      'sobre.p15': 'Mais do que escrever um livro, quero que juntas possamos viver uma linda missão.',
+      'sobre.h2': '<strong>Vamos ser missionárias juntas?</strong>',
+      'sobre.p16': 'Acredito que não precisamos estar em um púlpito ou viajar para lugares distantes para falar do amor de Deus. Nossos testemunhos também podem ser instrumentos em Suas mãos, alcançando mulheres que talvez nunca conheceremos pessoalmente.',
+      'sobre.p17': 'Imagine que, em algum lugar do mundo, uma mulher abra este livro em um dia difícil e encontre, justamente na sua história, as palavras que precisava para não desistir.',
+      'sobre.p18': 'Que presente maravilhoso seria fazer parte disso!',
+      'sobre.p19': 'Gosto de imaginar que somos pequenas sementes nas mãos de Deus. Cada uma com sua história, suas experiências e seu tempo de florescer. Mas, quando nos unimos em um mesmo propósito, podemos formar um lindo jardim de fé, amor e esperança.',
+      'sobre.q2': '<strong>E quem sabe a sua história seja justamente a sementinha que Deus usará para fazer outra mulher florescer?</strong>',
+      'sobre.p20': 'Por isso, minha querida, receba este convite com todo o carinho do meu coração.',
+      'sobre.p21': '<strong>Venha fazer parte desse sonho. Vamos compartilhar nossas histórias, espalhar esperança e ser missionárias juntas!</strong>',
+      'sobre.p22': 'Que Deus seja o verdadeiro autor dessa missão e que cada página seja um instrumento do Seu amor.',
+      'sobre.h3': '<strong>Vamos florescer com Deus, juntas! 🌷💕</strong>',
+      'sobre.farewell': 'Com muito carinho e orações,',
+      'sobre.role': 'Idealizadora do projeto Florescer com Deus',
+      'sobre.cta': 'Quero fazer parte! 🌷',
+
+
+      'final.title': 'Talvez este seja o chamado de Deus para você',
+      'final.text': 'Se estas palavras tocaram o seu coração, talvez seja porque chegou o momento de compartilhar a sua história, ela chegará em vários lugares do mundo, nunca saberemos as vidas que iremos alcançar, mas serão as sementes que Deus e o Espírito Santo irão cultivar, sua semente poderá fazer a vida de outra mulher florescer!',
+      'final.text2': 'Não guarde apenas para si aquilo que Deus fez em sua vida. Em algum lugar do mundo, existe uma mulher que precisa encontrar esperança através do seu testemunho.',
+      'final.text3': 'Sua história pode ser a resposta à oração de alguém. E neste livro, há um espaço especial esperando por você.',
+      'final.sign': 'Com carinho,',
+      'final.author': 'Alexandra Sá · Idealizadora do Florescer com Deus',
+
+      'footer.text': 'Florescer com Deus · Um projeto missionário de mulheres para alcançar mulheres do mundo todo',
+
+      /* ---------- Funil ---------- */
+      'funnel.backHome': '← Voltar ao início',
+      'funnel.p1': 'Termos',
+      'funnel.p2': 'Seu lugar',
+      'funnel.p3': 'Pagamento',
+      'funnel.stepOf1': 'Etapa 1 de 3',
+      'funnel.stepOf2': 'Etapa 2 de 3',
+      'funnel.stepOf3': 'Etapa 3 de 3',
+      'funnel.back': '← Voltar',
+
+      's1.title': 'Antes de começar, leia e aceite os termos',
+      's1.intro': 'Queremos que você participe com tranquilidade e clareza. Leia com carinho os termos abaixo.',
+      'terms.heading': 'Termos de Participação — Florescer com Deus',
+      'terms.preamble': 'O Florescer com Deus, no Grace Hub, nasceu do desejo de Alexandra Sá Fagundes de reunir histórias reais de mulheres de diferentes lugares do mundo — respostas de oração, milagres, recomeços e experiências do cotidiano com Deus — e transformá-las em mensagens de fé, esperança e encorajamento. Ao se inscrever, você concorda com os termos a seguir:',
+      'terms.t1': '<strong>1. Autorização de compartilhamento.</strong> A participante autoriza, de forma gratuita, o uso e o compartilhamento de sua história/testemunho no livro Florescer com Deus e em materiais de divulgação do projeto.',
+      'terms.t2': '<strong>2. Data de publicação.</strong> A história será publicada no livro na data correspondente ao aniversário da participante, compondo um dos 365 dias da obra.',
+      'terms.t3': '<strong>3. Veracidade e autoria.</strong> A participante declara que o conteúdo compartilhado é verídico, baseado em sua própria experiência, e de sua autoria, sem violar direitos de terceiros.',
+      'terms.t4': '<strong>4. Edição do texto.</strong> A Grace Hub e Alexandra Sá Fagundes poderão revisar e editar o texto para fins de publicação (ortografia, tamanho, clareza e padronização), sempre preservando o sentido original do testemunho.',
+      'terms.t5': '<strong>5. Participação voluntária e valor de custeio.</strong> A participação é voluntária. O valor cobrado destina-se exclusivamente ao custeio do projeto missionário (confecção do livro, site, hospedagem e manutenção) e não representa compra de espaço publicitário.',
+      'terms.t6': '<strong>6. Dados pessoais.</strong> Nome, e-mail e WhatsApp informados serão utilizados apenas para contato relacionado ao projeto Florescer com Deus, não sendo vendidos nem compartilhados com terceiros para outras finalidades.',
+      'terms.t7': '<strong>7. Exemplar digital.</strong> Após a publicação, a participante receberá um exemplar digital do livro Florescer com Deus.',
+      'terms.t8': '<strong>8. Aceite.</strong> Ao marcar a opção abaixo e prosseguir com a inscrição, a participante declara ter lido, compreendido e aceito integralmente estes Termos de Participação.',
+      's1.accept': 'Li e aceito os Termos de Participação',
+      's1.next': 'Continuar →',
+
+      's2.title': 'Sua história já tem um lugar reservado no livro ✨',
+      's2.impact': 'Você está prestes a se tornar parte de algo eterno.',
+      's2.b1t': 'Sua história publicada no livro Florescer com Deus',
+      's2.b1p': 'O que Deus fez na sua vida será registrado e guardado para inspirar gerações.',
+      's2.b2t': 'Sua mensagem alcançará mulheres em todo o mundo',
+      's2.b2p': 'Um testemunho pode atravessar fronteiras e chegar a quem precisa de esperança hoje.',
+      's2.b3t': 'Publicada no seu aniversário — um presente especial',
+      's2.b3p': 'O dia em que você nasceu se torna o dia em que sua fé floresce na vida de outra mulher.',
+      's2.quote': '“Aquilo que Deus fez em sua vida pode trazer esperança para alguém que ainda está esperando pela própria resposta.”',
+      's2.belong': 'Cada história é única. A sua também é.',
+      's2.next': 'Quero garantir minha participação →',
+
+      's3.title': 'Última etapa — Garanta sua participação',
+      's3.subtitle': 'Valor único de participação: {valor}',
+      's3.name': 'Seu nome completo',
+      's3.namePh': 'Maria da Silva',
+      's3.whatsapp': 'WhatsApp',
+      's3.whatsappPh': '11 99999-9999',
+      's3.email': 'Seu e-mail',
+      's3.emailPh': 'voce@exemplo.com',
+      's3.submit': 'Finalizar inscrição e pagar',
+      's3.secure': '🔒 Pagamento seguro processado pela Stripe. Após a confirmação, você recebe o link do grupo privado no WhatsApp.'
+    },
+
+    /* ======================= ENGLISH ======================= */
+    en: {
+      'lang.label': 'Language',
+      'doc.home': 'Florescer com Deus | A missionary project for women',
+      'doc.funil': 'Sign up | Florescer com Deus',
+
+      'hero.eyebrow': 'A devotional written by 365 Adventist women',
+      'hero.title': 'Your story with God may be the flower another woman was missing today.',
+      'hero.text': 'Florescer com Deus brings together 365 true stories, one for each day of the year, told by women from all over the world. And there is a day waiting for yours: your birthday.',
+      'hero.cta': 'I want to take part',
+
+      'msg.eyebrow': 'A message for you',
+      'msg.title': 'Dear woman,',
+      'msg.p1': 'There was a moment in your life when you knew, beyond any doubt, that God was there. Maybe on a night when there was no way out. Maybe through a door that opened when everything seemed closed. Maybe in a silence that suddenly filled with peace.',
+      'msg.p2': 'That moment was not only yours. It was a gift God placed in your hands so that, in the right time, you could give it to someone who needs to hear: <em>you are not alone</em>.',
+      'msg.p3': 'Right now, somewhere in the world, a woman wakes up tired, afraid, with questions she cannot say out loud. She does not need a speech. She needs a true story, told by someone who has also cried, also doubted and also seen God at work.',
+      'msg.p4': 'That is how Florescer com Deus was born.',
+
+      'author.photo': '[PHOTO OF ALEXANDRA]',
+      'author.eyebrow': 'The heart behind this project',
+      'author.p1': 'Alexandra is a Christian, a Seventh-day Adventist, married, a mother of two and lives in Ireland. <em>Florescer com Deus</em> was born from a dream kept in her heart: to gather true stories from women all over the world, so that the faith of one strengthens the faith of others.',
+      'author.p2': '<em>"For there are tears that only those who cried can describe, prayers that only those who waited for the answer know, and victories whose true meaning is understood only by those who walked with God until they reached them."</em>',
+      'author.lermais': 'Read more 🌷',
+            'author.p3': 'And she truly hopes you will be part of this beautiful missionary project.',
+
+      'invite.eyebrow': 'A SPECIAL INVITATION FOR YOU',
+      'invite.italic': '<em>Your story is unique. Your voice has value. And what God has done in your life can make hope blossom in another woman\'s heart.</em>',
+      'invite.quote': 'If this invitation reached you, it is because, somehow, your story has already touched my life or the life of someone who knows me and helped me find you. And I believe, with all my heart, that it can also touch, inspire and transform the lives of many other women.',
+
+      'project.eyebrow': 'The project',
+      'project.title': '365 true stories for the whole year',
+      'project.c1t': '365 stories',
+      'project.c1p': 'One for each day of the year. Each devotional is a true testimony, told in the words of the one who lived it.',
+      'project.c2t': 'On your birthday',
+      'project.c2p': 'Your story takes the date you were born: a day in the book that carries your faith and your voice to other women.',
+      'project.c3t': 'Miracles and care',
+      'project.c3p': 'Accounts of faith, miracles and God’s care to strengthen women in every season of life.',
+
+      'world.eyebrow': 'Women from all over the world',
+      'world.title': 'Different languages, the same God',
+      'world.text': 'Women from Africa, Brazil, the United Kingdom, the United States, Japan, Portugal, Spain, Argentina, Colombia, Chile and many other places, united by the same faith in Christ.',
+      'chip.africa': 'Africa', 'chip.brasil': 'Brazil', 'chip.london': 'United Kingdom', 'chip.eua': 'United States',
+      'chip.japao': 'Japan', 'chip.portugal': 'Portugal', 'chip.espanha': 'Spain', 'chip.argentina': 'Argentina',
+      'chip.colombia': 'Colombia', 'chip.chile': 'Chile', 'chip.outros': 'and many other places',
+
+      'verse.text': '“Come and hear, all ye that fear God, and I will declare what he hath done for my soul.”',
+      'verse.ref': 'Psalm 66:16 (KJV)',
+
+      'why.eyebrow': 'Why take part',
+      'why.title': 'What your story can do',
+      'why.c1t': 'Comfort',
+      'why.c1p': 'A woman may read what God did in your life and remember that He cares for her too.',
+      'why.c2t': 'Be heard',
+      'why.c2p': 'Your experience with God matters. It deserves to be recorded, kept and shared.',
+      'why.c3t': 'Be part of something bigger',
+      'why.c3p': 'A missionary project that grows to encourage, motivate and inspire women.',
+
+      'how.eyebrow': 'How to take part',
+      'how.title': 'Three simple steps',
+      'how.s1t': 'Secure your spot',
+      'how.s1p': 'Reserve your place and your birthday in the book.',
+      'how.s2t': 'Tell your story',
+      'how.s2p': 'Share the experience with God that marked your life the most.',
+      'how.s3t': 'Bloom on your day',
+      'how.s3p': 'Your story will be published in the book on the date of your birthday.',
+
+      'part.eyebrow': 'Your participation',
+      'part.title': 'Florescer com Deus is waiting for your story',
+      'part.p1': 'Every woman in this project carries a story another woman needs to hear. A story of faith, new beginnings, healing and miracles — written by you, for her.',
+      'part.p2': 'By taking part, you do more than share a testimony. You become a co-author of a mission that will reach women in different countries, languages and cultures.',
+      'part.p3': 'Your story deserves to be read. There is a day in the book with your name waiting for you.',
+      'part.cta': 'I want to be part of this project →',
+
+      'faq.eyebrow': 'Your questions answered',
+      'faq.title': 'Frequently Asked Questions',
+      'nav.participando': 'I am already participating', 'nav.dashboard': 'Dashboard',
+      "nav.sair": "Log out",
+      'nav.quem': 'Who founded it?', 'nav.faq': 'Frequent questions', 'nav.participar': 'Participate', 'nav.login': 'Login', 'nav.submenu1': 'I already participate', 'nav.submenu2': 'Restricted area', 'nav.inicio': 'Home', 'brand.name': 'Flourish with God', 'brand.line1': 'Flourish', 'brand.line2': 'with God', 
+      "form.eyebrow": "Co-author Form",
+      "form.title": "Co-author Form 🌷",
+      "form.subtitle": "Please fill in all required fields carefully.",
+      "form.sent": "Form already submitted",
+      "form.sent.info": "You have already submitted the co-author form. If you need help, contact the organizers through the WhatsApp group.",
+      "form.back": "← Back to my area",
+      "form.required": "* Indicates a required question",
+      "form.sec1": "Personal Information",
+      "form.sec2": "Mini Bio",
+      "form.sec3": "Testimony",
+      "form.sec4": "Photo",
+      "form.sec5": "Preferences",
+      "form.sec6": "Optional",
+      "form.f1": "Full Name *",
+      "form.f2": "Name to be published *",
+      "form.f3": "E-mail *",
+      "form.f4": "Phone *",
+      "form.f5": "Country of Birth *",
+      "form.f6": "Current Country *",
+      "form.f7": "Profession or Vocation *",
+      "form.f8": "Mini bio – Brief information representing your faith journey (Limit: 60 words) *",
+      "form.f9": "Birthday (Day and Month) for meditation *",
+      "form.f9.ph": "e.g. March 15",
+      "form.f10": "Testimony Title (Optional)",
+      "form.f11.label": "Testimony file – Word format (.docx) *",
+      "form.f11.hint": "<ul><li>Write naturally and sincerely. Your personal experience matters more than elaborate words.</li><li>Focus on one meaningful story rather than trying to tell your entire life journey in 250 words.</li><li>Use short paragraphs, check names and dates, and avoid abbreviations or excessive quotations.</li><li>If you mention other people, respect their privacy and do not include personal information without their permission.</li><li>When quoting Bible verses, include the book, chapter, verse, and Bible translation used.</li><li>Submit your text as an editable Word document (.docx).</li></ul>",
+      "form.f12": "Photo: Individual portrait with good lighting, no excessive filters, and preferably a simple, neutral background. *",
+      "form.f13": "Language Preference for Communication *",
+      "form.f14": "Are you comfortable with your name and testimony being shared on our social media platforms to promote the book? *",
+      "form.f15": "How did you hear about this project? *",
+      "form.f16": "Which aspect of your faith journey are you most passionate about sharing?",
+      "form.f17": "Are you interested in participating in future events or live sessions related to the book release?",
+      "form.f18": "How would you rate your level of excitement to participate in this collective work?",
+      "form.words": "words",
+      "form.max10": "Maximum 10 MB",
+      "form.max10photo": "Maximum 10 MB · JPG, PNG or WEBP",
+      "form.choose": "— choose —",
+      "form.opt.pt": "Português",
+      "form.opt.en": "English",
+      "form.opt.es": "Español",
+      "form.opt.yes": "Yes",
+      "form.opt.no": "No",
+      "form.opt.maybe": "Maybe",
+      "form.opt.social": "Social Media",
+      "form.opt.friend": "Friend or Family",
+      "form.opt.church": "Church",
+      "form.opt.invite": "Personal Invitation from the Project Creator",
+      "form.opt.other": "Other",
+      "form.opt.overcoming": "Overcoming adversity",
+      "form.opt.growth": "Spiritual growth",
+      "form.opt.purpose": "Finding purpose",
+      "form.opt.service": "Acts of service",
+      "form.opt.prayer": "Transformation through prayer",
+      "form.scale.lo": "Low",
+      "form.scale.hi": "High",
+      "form.submit": "Submit form",
+      "form.errors": "Please correct the errors below:",
+      "area.eyebrow": "Participant Area",
+      "area.hello": "Hello",
+      "area.intro": "We are so glad to have you in <em>Flourishing with God</em>. Here you will find everything you need to take part in the book.",
+      "area.wa.title": "Exclusive group",
+      "area.wa.desc": "Join the participants’ WhatsApp group to receive guidance and updates.",
+      "area.wa.cta": "Join the group",
+      "area.wa.soon": "Link coming soon",
+      "area.form.title": "Co-author Form",
+      "area.form.desc": "Send your testimony and your information for the book.",
+      "area.form.done": "✅ Form submitted",
+      "area.form.cta": "Fill in the form",
+      "area.guide.title": "Writing Guide for Co-authors",
+      "area.guide.desc": "Download the PDF with guidance for writing your story.",
+      "area.guide.cta": "Download Writing Guide (PDF)",
+      "area.guide.soon": "Available soon",
+        'faq.q1': 'Do I need to be a professional writer to take part?',
+      'faq.q2': 'Do I need to pay anything to take part?',
+      'faq.q3': 'Will I be able to buy the book after it is published?',
+      'faq.q4': 'Can I also help promote the book and earn from sales?',
+      'faq.q5': 'Will the book be published in only one language?',
+      'faq.q6': 'How do I register?',
+      'faq.q7': 'I know an Adventist friend with a beautiful testimony. Can she take part too?',
+      'faq.q8': 'Is the payment method secure?',
+      'faq.q9': 'Will I receive royalties from book sales?',
+      'faq.q10': 'When will the book be published?',
+      'faq.a1': '<p>Not at all! You only need a true story to share. The most important thing is to tell, with sincerity, a meaningful experience from your walk with God. Our desire is to gather testimonies capable of inspiring and strengthening the faith of other women.</p>',
+      'faq.a2': '<p>To support the realisation of this dream, we ask for a <strong>symbolic contribution at the time of registration</strong>.</p><p>This amount will go towards the costs of preparing, printing and publishing the book. Your contribution is a way of helping this missionary project to move forward and reach women in different parts of the world.</p>',
+      'faq.a3': '<p>Yes! Florescer com Deus will be available for purchase in <strong>physical and digital</strong> formats, with the aim of reaching readers in different countries. You will be able to get your copy and share this special message with family and friends.</p>',
+      'faq.a4': '<p>Yes! Participants will be able to receive an <strong>exclusive referral link</strong>, allowing them to share the book with others and earn a commission on sales made through that link.</p><p>Before confirming your participation, you will have access to the terms and conditions, including information about the affiliate programme, commission percentages and payment rules.</p>',
+      'faq.a5': '<p>Our mission is to bring these stories to as many women as possible! And we have writers from several countries taking part in the project. That is why the project plans to make the book available in <strong>different languages</strong>, broadening its international reach.</p><p>The available translations and editions will be announced according to the publishing schedule in each market.</p>',
+      'faq.a6': '<p>It is very simple!</p><ol style="padding-left:20px;margin-top:8px;"><li style="margin-bottom:6px;">Click the <strong>I want to take part</strong> button.</li><li style="margin-bottom:6px;">Carefully read and accept the participation terms and conditions.</li><li>Fill in your details and complete your registration.</li></ol><p style="margin-top:12px;">After confirmation, you will receive guidance on submitting your story and taking part in the next stages of the project.</p>',
+      'faq.a7': '<p>Of course! We would be very happy to hear her story!</p><p>Share this page and invite other Adventist women to be part of this mission. While there are spots available for new co-authors, registrations may be received and reviewed by the project organisers.</p>',
+      'faq.a8': '<p>The contribution will be processed through an online payment platform with secure processing and financial data protection.</p><p>Payment information will be handled by the responsible provider in accordance with their security and privacy policies. Before completing, you will be able to review the amount and transaction details.</p>',
+      'faq.a9': '<p>Participation as a co-author does not include the payment of royalties on general sales of the work.</p><p>However, you may take part in the referral programme through an exclusive link and earn commissions on eligible sales made through it, as set out in the conditions presented before registration.</p>',
+      'faq.a10': '<p>We are working with great care so that Florescer com Deus can be published as soon as possible. Participants will receive information about the schedule, production stages and expected launch date.</p>',
+      'faq.closing1': 'Your story may be the answer to another woman\'s prayer.',
+      'faq.closing2': 'More than writing a book, we want to unite women in a mission of faith, love and hope.',
+      'faq.closing3': 'Let us flourish with God, together!',
+      'doc.sobre': 'Meet Alexandra Sá | Florescer com Deus',
+      'sobre.eyebrow': 'Project founder',
+      'sobre.title': 'Get to know a little about me and the story behind this dream 🌷',
+      'sobre.intro': '<em>Hello, my dear! What a joy to have you here!</em>',
+      'sobre.p1': 'Before sharing this very special project, I want to introduce myself and tell you a little about the dream God placed in my heart.',
+      'sobre.p2': '<strong>My name is Alexandra Sá.</strong> I am a Christian, a Seventh-day Adventist, married, a mother of two and I currently live in Ireland with my family.',
+      'sobre.p3': 'Just like you, I am a woman who lives through her challenges, joys, worries and moments of faith. A woman who also has dreams, faces difficult days, learns from new beginnings and finds in God the strength she needs to keep going.',
+      'sobre.p4': 'Throughout my journey, God gifted me with the opportunity to meet wonderful women, each with a unique story. Women who faced silent battles, went through moments of pain, lived extraordinary experiences with God and received answers to prayer that move you just to hear about.',
+      'sobre.p5': 'How many times I caught myself thinking: <em>Lord, how I wish other women could also hear this story!</em>',
+      'sobre.p6': 'But there was something that always touched my heart: no matter how much I tried to tell someone else\'s testimony, I could never convey the same emotion, the same feelings and the depth of someone who had truly lived that experience.',
+      'sobre.q1': '<strong>Because there are tears that only those who have cried them can describe, prayers that only those who have waited for the answer truly know and victories whose real meaning only those who walked with God until they reached them can understand.</strong>',
+      'sobre.p7': 'And I thought about how many women, scattered across the world, could be strengthened by these testimonies.',
+      'sobre.p8': 'Perhaps a woman today is facing a silent struggle, feeling alone, tired or even losing hope. And perhaps the story you carry is exactly what she needs to read to find strength, renew her faith or simply remember that God has not forgotten her.',
+      'sobre.p9': 'That is how a dream, kept for so long in my heart and brought before God in prayer so many times, began to take shape.',
+      'sobre.h1': '<strong>And Florescer com Deus was born! 🌷</strong>',
+      'sobre.p10': 'A book with <strong>365 meditations</strong>, written from the real experiences of Adventist women from different parts of the world. A project born from the desire to share what God has done in our lives and turn each testimony into a message of faith, love and hope.',
+      'sobre.p11': 'And do you know what makes this dream even more beautiful?',
+      'sobre.p12': '<strong>I don\'t want to fulfil it alone. I want you to be part of it!</strong>',
+      'sobre.p13': 'You don\'t need to be a writer, to have a story that seems extraordinary in the world\'s eyes or to find perfect words. You only need to share, with an open heart, an experience from your walk with God.',
+      'sobre.p14': 'Because, many times, what we consider simple in our own life can represent a true miracle for someone else.',
+      'sobre.p15': 'More than writing a book, I want us to live a beautiful mission together.',
+      'sobre.h2': '<strong>Shall we be missionaries together?</strong>',
+      'sobre.p16': 'I believe we don\'t need to be on a pulpit or travel to distant places to speak of God\'s love. Our testimonies can also be instruments in His hands, reaching women we may never meet in person.',
+      'sobre.p17': 'Imagine that somewhere in the world, a woman opens this book on a difficult day and finds, in your story, the very words she needed to not give up.',
+      'sobre.p18': 'What a wonderful gift it would be to be part of that!',
+      'sobre.p19': 'I like to imagine that we are small seeds in God\'s hands. Each one with her story, her experiences and her time to bloom. But when we come together for the same purpose, we can form a beautiful garden of faith, love and hope.',
+      'sobre.q2': '<strong>And who knows — your story may be the very little seed God will use to make another woman bloom?</strong>',
+      'sobre.p20': 'So, my dear, receive this invitation with all the love in my heart.',
+      'sobre.p21': '<strong>Come and be part of this dream. Let us share our stories, spread hope and be missionaries together!</strong>',
+      'sobre.p22': 'May God be the true author of this mission and may every page be an instrument of His love.',
+      'sobre.h3': '<strong>Let us flourish with God, together! 🌷💕</strong>',
+      'sobre.farewell': 'With much love and prayers,',
+      'sobre.role': 'Founder of the Florescer com Deus project',
+      'sobre.cta': 'I want to take part! 🌷',
+
+
+      'final.title': 'Perhaps this is God\'s calling for you',
+      'final.text': 'If these words touched your heart, perhaps it is because the moment has come to share your story, it will reach many places in the world, we will never know the lives we will touch, but they will be seeds that God and the Holy Spirit will cultivate, your seed can make another woman\'s life flourish!',
+      'final.text2': 'Do not keep to yourself what God has done in your life. Somewhere in the world, there is a woman who needs to find hope through your testimony.',
+      'final.text3': 'Your story may be the answer to someone\'s prayer. And in this book, there is a special place waiting for you.',
+      'final.sign': 'With love,',
+      'final.author': 'Alexandra Sá · Founder of Florescer com Deus',
+
+      'footer.text': 'Florescer com Deus · A missionary project by women to reach women all over the world',
+
+      'funnel.backHome': '← Back to home',
+      'funnel.p1': 'Terms',
+      'funnel.p2': 'Your place',
+      'funnel.p3': 'Payment',
+      'funnel.stepOf1': 'Step 1 of 3',
+      'funnel.stepOf2': 'Step 2 of 3',
+      'funnel.stepOf3': 'Step 3 of 3',
+      'funnel.back': '← Back',
+
+      's1.title': 'Before you begin, please read and accept the terms',
+      's1.intro': 'We want you to take part with peace of mind and clarity. Please read the terms below carefully.',
+      'terms.heading': 'Participation Terms — Florescer com Deus',
+      'terms.preamble': 'Florescer com Deus, at Grace Hub, was born from Alexandra Sá Fagundes’ desire to gather true stories from women in different parts of the world — answered prayers, miracles, new beginnings and everyday experiences with God — and turn them into messages of faith, hope and encouragement. By signing up, you agree to the following terms:',
+      'terms.t1': '<strong>1. Permission to share.</strong> The participant grants, free of charge, permission to use and share her story/testimony in the book Florescer com Deus and in the project’s promotional materials.',
+      'terms.t2': '<strong>2. Publication date.</strong> The story will be published in the book on the date corresponding to the participant’s birthday, as one of the 365 days of the work.',
+      'terms.t3': '<strong>3. Truthfulness and authorship.</strong> The participant declares that the content shared is true, based on her own experience and written by her, without infringing the rights of others.',
+      'terms.t4': '<strong>4. Editing.</strong> Grace Hub and Alexandra Sá Fagundes may review and edit the text for publication purposes (spelling, length, clarity and standardization), always preserving the original meaning of the testimony.',
+      'terms.t5': '<strong>5. Voluntary participation and cost contribution.</strong> Participation is voluntary. The fee is used exclusively to cover the costs of the missionary project (book production, website, hosting and maintenance) and does not represent the purchase of advertising space.',
+      'terms.t6': '<strong>6. Personal data.</strong> The name, e-mail and WhatsApp number provided will be used only for contact related to the Florescer com Deus project and will not be sold or shared with third parties for any other purpose.',
+      'terms.t7': '<strong>7. Digital copy.</strong> After publication, the participant will receive a digital copy of the book Florescer com Deus.',
+      'terms.t8': '<strong>8. Acceptance.</strong> By checking the option below and continuing with the registration, the participant declares that she has read, understood and fully accepts these Participation Terms.',
+      's1.accept': 'I have read and accept the Participation Terms',
+      's1.next': 'Continue →',
+
+      's2.title': 'Your story already has a place reserved in the book ✨',
+      's2.impact': 'You are about to become part of something eternal.',
+      's2.b1t': 'Your story published in the book Florescer com Deus',
+      's2.b1p': 'What God did in your life will be recorded and kept to inspire generations.',
+      's2.b2t': 'Your message will reach women all over the world',
+      's2.b2p': 'One testimony can cross borders and reach someone who needs hope today.',
+      's2.b3t': 'Published on your birthday — a special gift',
+      's2.b3p': 'The day you were born becomes the day your faith blooms in another woman’s life.',
+      's2.quote': '“What God has done in your life can bring hope to someone who is still waiting for her own answer.”',
+      's2.belong': 'Every story is unique. Yours is too.',
+      's2.next': 'I want to secure my spot →',
+
+      's3.title': 'Final step — Secure your participation',
+      's3.subtitle': 'One-time participation fee: {valor}',
+      's3.name': 'Your full name',
+      's3.namePh': 'Mary Smith',
+      's3.whatsapp': 'WhatsApp',
+      's3.whatsappPh': '555 123-4567',
+      's3.email': 'Your e-mail',
+      's3.emailPh': 'you@example.com',
+      's3.submit': 'Complete registration and pay',
+      's3.secure': '🔒 Secure payment processed by Stripe. After confirmation, you will receive the link to the private WhatsApp group.'
+    },
+
+    /* ======================= ESPAÑOL ======================= */
+    es: {
+      'lang.label': 'Idioma',
+      'doc.home': 'Florescer com Deus | Proyecto misionero para mujeres',
+      'doc.funil': 'Inscripción | Florescer com Deus',
+
+      'hero.eyebrow': 'Un devocional escrito por 365 mujeres adventistas',
+      'hero.title': 'Tu historia con Dios puede ser la flor que le faltaba al día de otra mujer.',
+      'hero.text': 'Florescer com Deus reúne 365 historias reales, una para cada día del año, contadas por mujeres de todo el mundo. Y hay un día esperando la tuya: el de tu cumpleaños.',
+      'hero.cta': 'Quiero ser parte',
+
+      'msg.eyebrow': 'Un mensaje para ti',
+      'msg.title': 'Querida mujer,',
+      'msg.p1': 'Hay un momento de tu vida en el que supiste, sin lugar a dudas, que Dios estaba allí. Quizás en una noche en la que ya no había salida. Quizás en una puerta que se abrió cuando todo parecía cerrado. Quizás en un silencio que, de repente, se llenó de paz.',
+      'msg.p2': 'Ese momento no fue solo tuyo. Fue un regalo que Dios puso en tus manos para que, a su tiempo, lo entregaras a alguien que necesita escuchar: <em>no estás sola</em>.',
+      'msg.p3': 'En este instante, en algún lugar del mundo, una mujer despierta cansada, con miedo y con preguntas que no se atreve a decir en voz alta. No necesita un discurso. Necesita una historia verdadera, contada por alguien que también lloró, también dudó y también vio a Dios obrar.',
+      'msg.p4': 'Así nació Florescer com Deus.',
+
+      'author.photo': '[FOTO DE ALEXANDRA]',
+      'author.eyebrow': 'Quién ideó este proyecto',
+      'author.p1': 'Alexandra es cristiana, adventista del séptimo día, casada, madre de dos hijos y vive en Irlanda. <em>Florescer com Deus</em> nació de un sueño guardado en su corazón: reunir historias reales de mujeres de todo el mundo, para que la fe de una fortalezca la fe de otras.',
+      'author.p2': '<em>"Porque hay lágrimas que solo quien lloró puede describir, oraciones que solo quien esperó la respuesta conoce y victorias cuyo verdadero significado solo entiende quien caminó con Dios hasta alcanzarlas."</em>',
+      'author.lermais': 'Leer más 🌷',
+            'author.p3': 'Y ella desea mucho que formes parte de este hermoso proyecto misionero.',
+
+      'invite.eyebrow': 'UNA INVITACIÓN ESPECIAL PARA TI',
+      'invite.italic': '<em>Tu historia es única. Tu voz tiene valor. Y lo que Dios hizo en tu vida puede hacer florecer la esperanza en el corazón de otra mujer.</em>',
+      'invite.quote': 'Si esta invitación llegó hasta ti, es porque, de alguna manera, tu historia ya tocó mi vida o la de alguien que me conoce y me ayudó a llegar hasta ti. Y creo, con todo mi corazón, que también puede tocar, inspirar y transformar la vida de muchas otras mujeres.',
+
+      'project.eyebrow': 'El proyecto',
+      'project.title': '365 historias reales para todo el año',
+      'project.c1t': '365 historias',
+      'project.c1p': 'Una para cada día del año. Cada devocional es un testimonio verdadero, contado con las palabras de quien lo vivió.',
+      'project.c2t': 'En tu cumpleaños',
+      'project.c2p': 'Tu historia ocupa la fecha en que naciste: un día del libro que lleva tu fe y tu voz a otras mujeres.',
+      'project.c3t': 'Milagros y cuidado',
+      'project.c3p': 'Relatos de fe, milagros y del cuidado de Dios para fortalecer a mujeres en cada etapa de la vida.',
+
+      'world.eyebrow': 'Mujeres de todo el mundo',
+      'world.title': 'Idiomas diferentes, el mismo Dios',
+      'world.text': 'Mujeres de África, Brasil, Reino Unido, Estados Unidos, Japón, Portugal, España, Argentina, Colombia, Chile y muchos otros lugares, unidas por la misma fe en Cristo.',
+      'chip.africa': 'África', 'chip.brasil': 'Brasil', 'chip.london': 'Reino Unido', 'chip.eua': 'Estados Unidos',
+      'chip.japao': 'Japón', 'chip.portugal': 'Portugal', 'chip.espanha': 'España', 'chip.argentina': 'Argentina',
+      'chip.colombia': 'Colombia', 'chip.chile': 'Chile', 'chip.outros': 'y otros lugares',
+
+      'verse.text': '“Venid, oíd todos los que teméis a Dios, y contaré lo que ha hecho a mi alma.”',
+      'verse.ref': 'Salmos 66:16 (RVR1960)',
+
+      'why.eyebrow': 'Por qué participar',
+      'why.title': 'Lo que tu historia puede hacer',
+      'why.c1t': 'Consolar',
+      'why.c1p': 'Una mujer puede leer lo que Dios hizo en tu vida y recordar que Él también cuida de ella.',
+      'why.c2t': 'Ser escuchada',
+      'why.c2p': 'Tu experiencia con Dios importa. Merece ser registrada, guardada y compartida.',
+      'why.c3t': 'Ser parte de algo mayor',
+      'why.c3p': 'Un proyecto misionero que crece para animar, motivar e inspirar a mujeres.',
+
+      'how.eyebrow': 'Cómo participar',
+      'how.title': 'Tres pasos sencillos',
+      'how.s1t': 'Asegura tu participación',
+      'how.s1p': 'Reserva tu lugar y el día de tu cumpleaños en el libro.',
+      'how.s2t': 'Cuenta tu historia',
+      'how.s2p': 'Comparte la experiencia con Dios que más marcó tu vida.',
+      'how.s3t': 'Florece en tu día',
+      'how.s3p': 'Tu historia será publicada en el libro en la fecha de tu cumpleaños.',
+
+      'part.eyebrow': 'Tu participación',
+      'part.title': 'Florescer com Deus está esperando tu historia',
+      'part.p1': 'Cada mujer que forma parte de este proyecto lleva una historia que otra mujer necesita escuchar. Una historia de fe, de nuevos comienzos, de sanidad y de milagros — escrita por ti, para ella.',
+      'part.p2': 'Al participar, no solo compartes un testimonio. Te conviertes en coautora de una misión que alcanzará a mujeres de diferentes países, idiomas y culturas.',
+      'part.p3': 'Tu historia merece ser leída. Hay un día en el libro con tu nombre esperándote.',
+      'part.cta': 'Quiero ser parte de este proyecto →',
+
+      'faq.eyebrow': 'Resuelve tus dudas',
+      'faq.title': 'Preguntas Frecuentes',
+      'nav.participando': 'Ya estoy participando', 'nav.dashboard': 'Dashboard',
+      "nav.sair": "Salir",
+      'nav.quem': '¿Quién lo fundó?', 'nav.faq': 'Preguntas frecuentes', 'nav.participar': 'Participar', 'nav.login': 'Iniciar sesión', 'nav.submenu1': 'Ya participo', 'nav.submenu2': 'Área restringida', 'nav.inicio': 'Inicio', 'brand.name': 'Florecer con Dios', 'brand.line1': 'Florecer', 'brand.line2': 'con Dios', 
+      "form.eyebrow": "Formulario de Coautora",
+      "form.title": "Formulario de Coautora 🌷",
+      "form.subtitle": "Complete con atención todos los campos obligatorios.",
+      "form.sent": "Formulario ya enviado",
+      "form.sent.info": "Ya enviaste el formulario de coautora. Si necesitas ayuda, comunícate con la organización por el grupo de WhatsApp.",
+      "form.back": "← Volver a mi área",
+      "form.required": "* Indica una pregunta obligatoria",
+      "form.sec1": "Datos Personales",
+      "form.sec2": "Mini Bio",
+      "form.sec3": "Testimonio",
+      "form.sec4": "Foto",
+      "form.sec5": "Preferencias",
+      "form.sec6": "Opcional",
+      "form.f1": "Nombre Completo *",
+      "form.f2": "Nombre a publicar *",
+      "form.f3": "E-mail *",
+      "form.f4": "Teléfono *",
+      "form.f5": "País de Nacimiento *",
+      "form.f6": "País actual *",
+      "form.f7": "Actuación o vocación *",
+      "form.f8": "Breve información sobre tu camino de fe (Límite: 60 palabras) *",
+      "form.f9": "Fecha de cumpleaños (Día y Mes) *",
+      "form.f9.ph": "Ej: 15 de marzo",
+      "form.f10": "Título del testimonio (Opcional)",
+      "form.f11.label": "Archivo del testimonio – formato Word (.docx) *",
+      "form.f11.hint": "<ul><li>Escribe con naturalidad y sinceridad. Tu experiencia personal es más importante que las frases elaboradas.</li><li>Elige una historia central; evita contar toda tu trayectoria en 250 palabras.</li><li>Usa párrafos cortos, revisa nombres y fechas y evita abreviaturas o exceso de citas.</li><li>Si mencionas a otras personas, respeta su privacidad y no incluyas información personal sin su autorización.</li><li>Al citar versículos bíblicos, indica el libro, capítulo, versículo y la traducción utilizada.</li><li>Envía tu texto en formato Word (.docx), que permita la edición.</li></ul>",
+      "form.f12": "Foto: Retrato individual, con buena iluminación, sin filtros excesivos y, preferiblemente, con un fondo sencillo y discreto. *",
+      "form.f13": "Preferencia de Idioma para Comunicación *",
+      "form.f14": "¿Autoriza que su nombre y testimonio sean compartidos en nuestras redes sociales para promocionar el libro? *",
+      "form.f15": "¿Cómo se enteró de este proyecto? *",
+      "form.f16": "¿Qué aspecto de su camino de fe le apasiona más compartir?",
+      "form.f17": "¿Le interesa participar en futuros eventos o sesiones en vivo sobre el lanzamiento del libro?",
+      "form.f18": "¿Cuál es su nivel de entusiasmo para participar en esta obra colectiva?",
+      "form.words": "palabras",
+      "form.max10": "Máximo 10 MB",
+      "form.max10photo": "Máximo 10 MB · JPG, PNG o WEBP",
+      "form.choose": "— seleccione —",
+      "form.opt.pt": "Português",
+      "form.opt.en": "English",
+      "form.opt.es": "Español",
+      "form.opt.yes": "Sí",
+      "form.opt.no": "No",
+      "form.opt.maybe": "Tal vez",
+      "form.opt.social": "Redes Sociales",
+      "form.opt.friend": "Amigo o Familiar",
+      "form.opt.church": "Iglesia",
+      "form.opt.invite": "Invitación Personal de la Creadora del Proyecto",
+      "form.opt.other": "Otro",
+      "form.opt.overcoming": "Superación de adversidades",
+      "form.opt.growth": "Crecimiento espiritual",
+      "form.opt.purpose": "Encontrando propósito",
+      "form.opt.service": "Actos de servicio",
+      "form.opt.prayer": "Transformación a través de la oración",
+      "form.scale.lo": "Bajo",
+      "form.scale.hi": "Alto",
+      "form.submit": "Enviar formulario",
+      "form.errors": "Por favor, corrige los errores a continuación:",
+      "area.eyebrow": "Área del Participante",
+      "area.hello": "Hola",
+      "area.intro": "Qué alegría tenerte en <em>Florecer con Dios</em>. Aquí encontrarás todo para participar en el libro.",
+      "area.wa.title": "Grupo exclusivo",
+      "area.wa.desc": "Únete al grupo de WhatsApp de las participantes para recibir orientaciones y avisos.",
+      "area.wa.cta": "Entrar al grupo",
+      "area.wa.soon": "Enlace próximamente",
+      "area.form.title": "Formulario de Coautora",
+      "area.form.desc": "Envía tu testimonio y tus datos para el libro.",
+      "area.form.done": "✅ Formulario enviado",
+      "area.form.cta": "Completar formulario",
+      "area.guide.title": "Guía de Escritura para Coautoras",
+      "area.guide.desc": "Descarga el PDF con las orientaciones para escribir tu historia.",
+      "area.guide.cta": "Descargar Guía de Escritura (PDF)",
+      "area.guide.soon": "Disponible próximamente",
+        'faq.q1': '¿Necesito ser escritora profesional para participar?',
+      'faq.q2': '¿Necesito pagar algo para participar?',
+      'faq.q3': '¿Podré adquirir el libro después de su publicación?',
+      'faq.q4': '¿También puedo ayudar a difundir el libro y recibir por las ventas?',
+      'faq.q5': '¿El libro se publicará en un solo idioma?',
+      'faq.q6': '¿Cómo me inscribo?',
+      'faq.q7': 'Conozco a una amiga adventista con un testimonio hermoso. ¿Ella también puede participar?',
+      'faq.q8': '¿La forma de pago es segura?',
+      'faq.q9': '¿Recibiré derechos de autor por las ventas del libro?',
+      'faq.q10': '¿Cuándo se publicará el libro?',
+      'faq.a1': '<p>¡No! Solo necesitas tener una historia verdadera que compartir. Lo más importante es contar, con sinceridad, una experiencia significativa de tu caminar con Dios. Nuestro deseo es reunir testimonios capaces de inspirar y fortalecer la fe de otras mujeres.</p>',
+      'faq.a2': '<p>Para apoyar la realización de este sueño, solicitamos una <strong>contribución simbólica al momento de la inscripción</strong>.</p><p>Este valor se destinará a cubrir los costos de preparación, impresión y publicación del libro. Tu contribución es una forma de ayudar a que este proyecto misionero siga adelante y alcance a mujeres en diferentes partes del mundo.</p>',
+      'faq.a3': '<p>¡Sí! Florescer com Deus estará disponible para compra en formato <strong>físico y digital</strong>, con el propósito de alcanzar lectoras en diferentes países. Así podrás adquirir tu ejemplar y compartir este mensaje especial con familiares y amigas.</p>',
+      'faq.a4': '<p>¡Sí! Las participantes podrán recibir un <strong>enlace exclusivo de difusión</strong>, que les permitirá compartir el libro con otras personas y recibir una comisión por las ventas realizadas a través de ese enlace.</p><p>Antes de confirmar tu participación, tendrás acceso a los términos y condiciones, incluida la información sobre el programa de afiliadas, los porcentajes de comisión y las reglas de pago.</p>',
+      'faq.a5': '<p>¡Nuestra misión es llevar estas historias al mayor número posible de mujeres! Y contamos con escritoras de varios países que formarán parte del proyecto. Por eso, el proyecto prevé la disponibilidad del libro en <strong>diferentes idiomas</strong>, ampliando su alcance internacional.</p><p>Las traducciones y versiones disponibles se anunciarán según el cronograma de publicación en cada mercado.</p>',
+      'faq.a6': '<p>¡Es muy sencillo!</p><ol style="padding-left:20px;margin-top:8px;"><li style="margin-bottom:6px;">Haz clic en el botón <strong>Quiero ser parte</strong>.</li><li style="margin-bottom:6px;">Lee atentamente y acepta los términos y condiciones de participación.</li><li>Completa tus datos y finaliza tu inscripción.</li></ol><p style="margin-top:12px;">Tras la confirmación, recibirás las instrucciones para enviar tu historia y participar en las próximas etapas del proyecto.</p>',
+      'faq.a7': '<p>¡Claro! ¡Nos encantaría conocer su historia!</p><p>Comparte esta página e invita a otras mujeres adventistas a formar parte de esta misión. Mientras haya oportunidades disponibles para nuevas coautoras, las inscripciones podrán ser recibidas y evaluadas por la organización del proyecto.</p>',
+      'faq.a8': '<p>La contribución se realizará a través de una plataforma de pago en línea con procesamiento seguro y protección de los datos financieros.</p><p>La información de pago será tratada por el proveedor responsable, conforme a sus políticas de seguridad y privacidad. Antes de finalizar, podrás verificar el valor y los datos de la transacción.</p>',
+      'faq.a9': '<p>La participación como coautora no incluye el pago de regalías sobre las ventas generales de la obra.</p><p>Sin embargo, podrás participar en el programa de difusión a través de un enlace exclusivo y recibir comisiones por las ventas elegibles realizadas a través de él, según las condiciones presentadas antes de la inscripción.</p>',
+      'faq.a10': '<p>Estamos trabajando con mucho cariño para que el Florescer com Deus sea publicado lo antes posible. Las participantes recibirán información sobre el cronograma, las etapas de producción y la fecha prevista de lanzamiento.</p>',
+      'faq.closing1': 'Tu historia puede ser la respuesta a la oración de otra mujer.',
+      'faq.closing2': 'Más que escribir un libro, queremos unir a mujeres en una misión de fe, amor y esperanza.',
+      'faq.closing3': '¡Floreceremos con Dios, juntas!',
+      'doc.sobre': 'Conoce a Alexandra Sá | Florescer com Deus',
+      'sobre.eyebrow': 'Fundadora del proyecto',
+      'sobre.title': 'Conoce un poco de mí y de la historia de este sueño 🌷',
+      'sobre.intro': '<em>¡Hola, querida! ¡Qué alegría tenerte aquí!</em>',
+      'sobre.p1': 'Antes de compartir este proyecto tan especial, quiero presentarme y contarte un poco sobre el sueño que Dios puso en mi corazón.',
+      'sobre.p2': '<strong>Mi nombre es Alexandra Sá.</strong> Soy cristiana, adventista del séptimo día, casada, madre de dos hijos y actualmente vivo en Irlanda con mi familia.',
+      'sobre.p3': 'Al igual que tú, soy una mujer que vive sus desafíos, sus alegrías, sus preocupaciones y sus momentos de fe. Una mujer que también tiene sueños, enfrenta días difíciles, aprende de los comienzos y encuentra en Dios la fuerza necesaria para continuar.',
+      'sobre.p4': 'A lo largo de mi camino, Dios me regaló la oportunidad de conocer mujeres maravillosas, cada una con una historia única. Mujeres que enfrentaron batallas silenciosas, atravesaron momentos de dolor, vivieron experiencias extraordinarias con Dios y recibieron respuestas a sus oraciones que emocionan solo de escuchar.',
+      'sobre.p5': 'Cuántas veces me encontré pensando: <em>¡Dios mío, cómo quisiera que otras mujeres también pudieran escuchar esta historia!</em>',
+      'sobre.p6': 'Pero había algo que siempre tocaba mi corazón: por más que intentara contar el testimonio de otra persona, nunca podría transmitir la misma emoción, los mismos sentimientos y la profundidad de quien realmente vivió esa experiencia.',
+      'sobre.q1': '<strong>Porque hay lágrimas que solo quien las ha llorado puede describir, oraciones que solo quien esperó la respuesta conoce y victorias cuyo verdadero significado solo entiende quien caminó con Dios hasta alcanzarlas.</strong>',
+      'sobre.p7': 'Y pensaba en cuántas mujeres, esparcidas por el mundo, podrían ser fortalecidas por esos testimonios.',
+      'sobre.p8': 'Quizás una mujer hoy enfrenta una lucha silenciosa, sintiéndose sola, cansada o incluso perdiendo la esperanza. Y quizás la historia que llevas contigo sea exactamente lo que ella necesita leer para encontrar fuerzas, renovar su fe o simplemente recordar que Dios no se olvidó de ella.',
+      'sobre.p9': 'Fue así como un sueño, guardado durante tanto tiempo en mi corazón y presentado tantas veces a Dios en oración, comenzó a tomar forma.',
+      'sobre.h1': '<strong>¡Y nació el Florescer com Deus! 🌷</strong>',
+      'sobre.p10': 'Un libro con <strong>365 meditaciones</strong>, escrito a partir de las experiencias reales de mujeres adventistas de diferentes partes del mundo. Un proyecto que nació del deseo de compartir lo que Dios ha hecho en nuestras vidas y transformar cada testimonio en un mensaje de fe, amor y esperanza.',
+      'sobre.p11': '¿Y sabes qué hace que este sueño sea aún más hermoso?',
+      'sobre.p12': '<strong>¡No quiero realizarlo sola. Quiero que tú formes parte de él!</strong>',
+      'sobre.p13': 'No necesitas ser escritora, tener una historia extraordinaria a los ojos del mundo ni encontrar palabras perfectas. Solo necesitas compartir, con el corazón abierto, una experiencia de tu caminar con Dios.',
+      'sobre.p14': 'Porque muchas veces, lo que consideramos simple en nuestra vida puede representar un verdadero milagro para otra persona.',
+      'sobre.p15': 'Más que escribir un libro, quiero que juntas podamos vivir una hermosa misión.',
+      'sobre.h2': '<strong>¿Seremos misioneras juntas?</strong>',
+      'sobre.p16': 'Creo que no necesitamos estar en un púlpito ni viajar a lugares lejanos para hablar del amor de Dios. Nuestros testimonios también pueden ser instrumentos en Sus manos, alcanzando a mujeres que quizás nunca conoceremos personalmente.',
+      'sobre.p17': 'Imagina que, en algún lugar del mundo, una mujer abra este libro en un día difícil y encuentre, precisamente en tu historia, las palabras que necesitaba para no rendirse.',
+      'sobre.p18': '¡Qué maravilloso regalo sería ser parte de eso!',
+      'sobre.p19': 'Me gusta imaginar que somos pequeñas semillas en las manos de Dios. Cada una con su historia, sus experiencias y su tiempo de florecer. Pero cuando nos unimos en un mismo propósito, podemos formar un hermoso jardín de fe, amor y esperanza.',
+      'sobre.q2': '<strong>¿Y quién sabe si tu historia sea precisamente la semillita que Dios usará para hacer florecer a otra mujer?</strong>',
+      'sobre.p20': 'Por eso, querida mía, recibe esta invitación con todo el cariño de mi corazón.',
+      'sobre.p21': '<strong>¡Ven y sé parte de este sueño! ¡Compartamos nuestras historias, esparcamos esperanza y seamos misioneras juntas!</strong>',
+      'sobre.p22': 'Que Dios sea el verdadero autor de esta misión y que cada página sea un instrumento de Su amor.',
+      'sobre.h3': '<strong>¡Florezcamos con Dios, juntas! 🌷💕</strong>',
+      'sobre.farewell': 'Con mucho cariño y oraciones,',
+      'sobre.role': 'Fundadora del proyecto Florescer com Deus',
+      'sobre.cta': '¡Quiero ser parte! 🌷',
+
+
+      'final.title': 'Quizás este sea el llamado de Dios para ti',
+      'final.text': 'Si estas palabras tocaron tu corazón, quizás sea porque llegó el momento de compartir tu historia, llegará a muchos lugares del mundo, nunca sabremos las vidas que alcanzaremos, pero serán semillas que Dios y el Espíritu Santo cultivarán, ¡tu semilla puede hacer florecer la vida de otra mujer!',
+      'final.text2': 'No guardes solo para ti lo que Dios hizo en tu vida. En algún lugar del mundo, hay una mujer que necesita encontrar esperanza a través de tu testimonio.',
+      'final.text3': 'Tu historia puede ser la respuesta a la oración de alguien. Y en este libro, hay un lugar especial esperándote.',
+      'final.sign': 'Con cariño,',
+      'final.author': 'Alexandra Sá · Creadora de Florescer com Deus',
+
+      'footer.text': 'Florescer com Deus · Un proyecto misionero de mujeres para alcanzar a mujeres de todo el mundo',
+
+      'funnel.backHome': '← Volver al inicio',
+      'funnel.p1': 'Términos',
+      'funnel.p2': 'Tu lugar',
+      'funnel.p3': 'Pago',
+      'funnel.stepOf1': 'Paso 1 de 3',
+      'funnel.stepOf2': 'Paso 2 de 3',
+      'funnel.stepOf3': 'Paso 3 de 3',
+      'funnel.back': '← Volver',
+
+      's1.title': 'Antes de comenzar, lee y acepta los términos',
+      's1.intro': 'Queremos que participes con tranquilidad y claridad. Lee con atención los términos a continuación.',
+      'terms.heading': 'Términos de Participación — Florescer com Deus',
+      'terms.preamble': 'Florescer com Deus, en Grace Hub, nació del deseo de Alexandra Sá Fagundes de reunir historias reales de mujeres de distintos lugares del mundo — oraciones respondidas, milagros, nuevos comienzos y experiencias cotidianas con Dios — y transformarlas en mensajes de fe, esperanza y ánimo. Al inscribirte, aceptas los siguientes términos:',
+      'terms.t1': '<strong>1. Autorización para compartir.</strong> La participante autoriza, de forma gratuita, el uso y la difusión de su historia/testimonio en el libro Florescer com Deus y en los materiales de divulgación del proyecto.',
+      'terms.t2': '<strong>2. Fecha de publicación.</strong> La historia será publicada en el libro en la fecha correspondiente al cumpleaños de la participante, formando uno de los 365 días de la obra.',
+      'terms.t3': '<strong>3. Veracidad y autoría.</strong> La participante declara que el contenido compartido es verídico, basado en su propia experiencia y de su autoría, sin violar derechos de terceros.',
+      'terms.t4': '<strong>4. Edición del texto.</strong> Grace Hub y Alexandra Sá Fagundes podrán revisar y editar el texto con fines de publicación (ortografía, extensión, claridad y estandarización), preservando siempre el sentido original del testimonio.',
+      'terms.t5': '<strong>5. Participación voluntaria y valor de costeo.</strong> La participación es voluntaria. El valor cobrado se destina exclusivamente a cubrir los costos del proyecto misionero (producción del libro, sitio web, hosting y mantenimiento) y no representa la compra de espacio publicitario.',
+      'terms.t6': '<strong>6. Datos personales.</strong> El nombre, el correo electrónico y el WhatsApp informados se utilizarán únicamente para el contacto relacionado con el proyecto Florescer com Deus, y no serán vendidos ni compartidos con terceros para otros fines.',
+      'terms.t7': '<strong>7. Ejemplar digital.</strong> Después de la publicación, la participante recibirá un ejemplar digital del libro Florescer com Deus.',
+      'terms.t8': '<strong>8. Aceptación.</strong> Al marcar la opción a continuación y continuar con la inscripción, la participante declara haber leído, comprendido y aceptado íntegramente estos Términos de Participación.',
+      's1.accept': 'He leído y acepto los Términos de Participación',
+      's1.next': 'Continuar →',
+
+      's2.title': 'Tu historia ya tiene un lugar reservado en el libro ✨',
+      's2.impact': 'Estás a punto de formar parte de algo eterno.',
+      's2.b1t': 'Tu historia publicada en el libro Florescer com Deus',
+      's2.b1p': 'Lo que Dios hizo en tu vida quedará registrado y guardado para inspirar a generaciones.',
+      's2.b2t': 'Tu mensaje alcanzará a mujeres en todo el mundo',
+      's2.b2p': 'Un testimonio puede cruzar fronteras y llegar a quien necesita esperanza hoy.',
+      's2.b3t': 'Publicada en tu cumpleaños — un regalo especial',
+      's2.b3p': 'El día en que naciste se convierte en el día en que tu fe florece en la vida de otra mujer.',
+      's2.quote': '“Lo que Dios hizo en tu vida puede traer esperanza a alguien que todavía está esperando su propia respuesta.”',
+      's2.belong': 'Cada historia es única. La tuya también.',
+      's2.next': 'Quiero asegurar mi participación →',
+
+      's3.title': 'Último paso — Asegura tu participación',
+      's3.subtitle': 'Valor único de participación: {valor}',
+      's3.name': 'Tu nombre completo',
+      's3.namePh': 'María García',
+      's3.whatsapp': 'WhatsApp',
+      's3.whatsappPh': '600 123 456',
+      's3.email': 'Tu correo electrónico',
+      's3.emailPh': 'tu@ejemplo.com',
+      's3.submit': 'Finalizar inscripción y pagar',
+      's3.secure': '🔒 Pago seguro procesado por Stripe. Tras la confirmación, recibirás el enlace del grupo privado de WhatsApp.'
+    }
+  };
+
+  // Moeda e valor por idioma (deve bater com FlorescerController::checkout)
+  // Valor único €10 em todos os idiomas; o Stripe converte para a moeda local
+  var PRICES = {
+    pt: { currency: 'eur', label: '€ 10,00' },
+    en: { currency: 'eur', label: '€10.00' },
+    es: { currency: 'eur', label: '10,00 €' }
+  };
+
+  function applyPrice(lang) {
+    var p = PRICES[lang] || PRICES.pt;
+    document.querySelectorAll('[data-i18n-valor]').forEach(function (el) {
+      el.setAttribute('data-i18n-valor', p.label);
+    });
+    document.querySelectorAll('[data-price-label]').forEach(function (el) {
+      el.textContent = p.label;
+    });
+    document.querySelectorAll('input[name="currency"]').forEach(function (inp) {
+      inp.value = p.currency;
+    });
+  }
+
+  function getStoredLang() {
+    try {
+      var saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved && SUPPORTED.indexOf(saved) !== -1) return saved;
+    } catch (e) { /* localStorage indisponível (modo privado) */ }
+    return 'pt';
+  }
+
+  function storeLang(lang) {
+    try { window.localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* ignora */ }
+  }
+
+  function translate(lang, key, el) {
+    var dict = T[lang] || T.pt;
+    var text = dict[key];
+    if (text === undefined) text = T.pt[key];
+    if (text === undefined) return null;
+    var valor = el && el.getAttribute('data-i18n-valor');
+    if (valor) text = text.replace(/\{valor\}/g, valor);
+    return text;
+  }
+
+  function applyLang(lang) {
+    if (SUPPORTED.indexOf(lang) === -1) lang = 'pt';
+
+    applyPrice(lang);
+
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var t = translate(lang, el.getAttribute('data-i18n'), el);
+      if (t !== null) el.textContent = t;
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(function (el) {
+      var t = translate(lang, el.getAttribute('data-i18n-html'), el);
+      if (t !== null) el.innerHTML = t;
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) {
+      var t = translate(lang, el.getAttribute('data-i18n-placeholder'), el);
+      if (t !== null) el.setAttribute('placeholder', t);
+    });
+
+    var root = document.documentElement;
+    root.setAttribute('lang', HTML_LANG[lang]);
+    var titleKey = root.getAttribute('data-i18n-title');
+    if (titleKey) {
+      var title = translate(lang, titleKey, null);
+      if (title) document.title = title;
+    }
+
+    document.querySelectorAll('[data-lang-select]').forEach(function (sel) {
+      sel.value = lang;
+    });
+
+    document.dispatchEvent(new CustomEvent('florescer:langchange', { detail: { lang: lang } }));
+  }
+
+  function init() {
+    applyLang(getStoredLang());
+
+    document.querySelectorAll('[data-lang-select]').forEach(function (sel) {
+      sel.addEventListener('change', function () {
+        storeLang(sel.value);
+        applyLang(sel.value);
+      });
+    });
+  }
+
+  window.FlorescerI18n = { apply: applyLang, current: getStoredLang, dict: T, prices: PRICES };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
